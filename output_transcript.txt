@@ -1,0 +1,12 @@
+Index|Speaker|Text|Timestamp Marker
+1|1|Recording.|[00:00:01]
+2|2|So we were doing a siren, weren't we?|
+3|2|But that was mainly for the upper stuff, wasn't it?|
+4|1|The siren — I think you decided that was gone because it was replaced.|[00:01:07]
+5|2|Yeah, we completely scrubbed that one out.|
+6|1|Yeah.|[00:02:15]
+7|2|But that was kind of—sorry, let me take that back. I'd obviously run that down before I scrubbed it out.|[00:50:15]
+8|2|So the fried-clear-to-breathy was more for the falsetto, wasn't it?|
+9|1|Was, but...|
+10|1|I'm finding it's useful for me to understand how to get from fry to chest voice, and from fry to falsetto.|[00:55:30]
+11|2|Yeah, which is great.|[01:02:41]

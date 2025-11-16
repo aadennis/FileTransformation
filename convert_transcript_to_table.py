@@ -37,9 +37,9 @@ def build_dataframe_with_index(input_file):
                 col3 = ""
 
             index = i + 1  # 1-based index
-            rows.append([speaker_id, text, col3, index])
+            rows.append([index, speaker_id, text, col3])
 
-    df = pd.DataFrame(rows, columns=["Speaker", "Text", "Timestamp Marker", "Index"])
+    df = pd.DataFrame(rows, columns=["Index","Speaker", "Text", "Timestamp Marker"])
     print(df)
 
     # Save to pipe-delimited file
