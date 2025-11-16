@@ -11,23 +11,29 @@ def build_dataframe_with_index(input_file):
     for line in lines:
         if line.startswith("00:") or line.startswith("01:"):
             if current_block:
-                blocks.append(" ".join(current_block))
+                blocks.append(current_block)
                 current_block = []
         current_block.append(line)
 
     if current_block:
-        blocks.append(" ".join(current_block))
+        blocks.append(current_block)
 
     rows = []
     last_minute = None
 
     for i, block in enumerate(blocks):
-        match = re.match(r"(\d{2}):(\d{2}):(\d{2})\s+(Speaker\s+[12])\s+(.*)", block)
+        if len(block) < 2:
+            continue  # skip incomplete blocks
+
+        header = block[0]
+        text = " ".join(block[1:])  # join all following lines as text
+
+        match = re.match(r"(\d{2}):(\d{2}):(\d{2})\s+Speaker\s+(1|2)", header)
         if match:
-            hh, mm, ss, speaker, text = match.groups()
+            hh, mm, ss, speaker_id = match.groups()
             timestamp = f"{hh}:{mm}:{ss}"
             minute = int(mm)
-            speaker_id = 1 if speaker == "Speaker 1" else 2
+            speaker_id = int(speaker_id)
 
             # Column 3: timestamp only if first row or minute changes
             if i == 0 or minute != last_minute:
@@ -39,7 +45,7 @@ def build_dataframe_with_index(input_file):
             index = i + 1  # 1-based index
             rows.append([index, speaker_id, text, col3])
 
-    df = pd.DataFrame(rows, columns=["Index","Speaker", "Text", "Timestamp Marker"])
+    df = pd.DataFrame(rows, columns=["Index", "Speaker", "Text", "Timestamp Marker"])
     print(df)
 
     # Save to pipe-delimited file
