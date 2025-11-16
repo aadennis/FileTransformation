@@ -1,5 +1,12 @@
 import pandas as pd
 import re
+import os
+import random
+
+def get_base_name(filepath):
+    """Returns the filename without extension from a full path."""
+    return os.path.splitext(os.path.basename(filepath))[0]
+
 
 def build_dataframe_with_index(input_file):
     """
@@ -8,8 +15,13 @@ def build_dataframe_with_index(input_file):
     and a timestamp marker that appears only for the first row of each minute.
 
     The resulting DataFrame is printed and saved as a pipe-delimited file
-    named 'output_transcript.txt'.
+    whose name is based on the input file.
     """
+
+    # Derive base name without extension
+    base_name = get_base_name(input_file)
+    output_file = f"{base_name}_out_{random.randint(1000, 9999)}.txt"
+
     # Open the input file and read non-empty lines, stripping surrounding whitespace
     with open(input_file, 'r', encoding='utf-8') as f:
         lines = [line.strip() for line in f if line.strip()]
@@ -69,7 +81,7 @@ def build_dataframe_with_index(input_file):
     print(df)
 
     # Save to a pipe-delimited file without the DataFrame index
-    df.to_csv("output_transcript.txt", sep="|", index=False, encoding="utf-8")
+    df.to_csv(output_file, sep="|", index=False, encoding="utf-8")
     print("✅ Pipe-delimited file saved as output_transcript.txt")
 
 # Example usage: call the function with the transcript filename
