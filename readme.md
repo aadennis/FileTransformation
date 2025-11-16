@@ -3,18 +3,18 @@
 ## Context
 Microsoft Word can ingest audio files, and transcribe them:  
 
-<img src="image.png" alt="alt text" width="40%"/>
+<img src="doc_assets/image.png" alt="alt text" width="40%"/>
 
 An example of output from this:  
 
-<img src="image-1.png" alt="alt text" width="60%"/>
+<img src="doc_assets/image-1.png" alt="alt text" width="60%"/>
 
 That is the context for this small Python script: it converts a plain transcript into a pipe-delimited table suitable for inspection or further processing.
 
 An example of its output:
 
 <!-- ![alt text](image-2.png) -->
-<img src="image-2.png" alt="alt text" width="60%"/>
+<img src="doc_assets/image-2.png" alt="alt text" width="60%"/>
 
 ## The detail
 
