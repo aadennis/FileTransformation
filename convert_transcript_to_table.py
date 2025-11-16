@@ -1,7 +1,7 @@
 import pandas as pd
 import re
 
-def build_dataframe_with_minute_markers(input_file):
+def build_dataframe_with_index(input_file):
     with open(input_file, 'r', encoding='utf-8') as f:
         lines = [line.strip() for line in f if line.strip()]
 
@@ -36,10 +36,11 @@ def build_dataframe_with_minute_markers(input_file):
             else:
                 col3 = ""
 
-            rows.append([speaker_id, text, col3, ""])
+            index = i + 1  # 1-based index
+            rows.append([speaker_id, text, col3, index])
 
-    df = pd.DataFrame(rows, columns=["Speaker", "Text", "Timestamp Marker", "Col4"])
+    df = pd.DataFrame(rows, columns=["Speaker", "Text", "Timestamp Marker", "Index"])
     print(df)
 
 # Example usage
-build_dataframe_with_minute_markers("input_transcript.txt")
+build_dataframe_with_index("input_transcript.txt")
