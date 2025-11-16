@@ -47,4 +47,4 @@ def build_dataframe_with_index(input_file):
     print("✅ Pipe-delimited file saved as output_transcript.txt")
 
 # Example usage
-build_dataframe_with_index("input_transcript.txt")
+build_dataframe_with_index("test_input_transcript.txt")
