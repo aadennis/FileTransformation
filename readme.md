@@ -1,6 +1,21 @@
 # Transcript -> Table Converter
 
-Small Python script that converts a plain transcript into a pipe-delimited table suitable for inspection or further processing.
+## Context
+Microsoft Word can ingest audio files, and transcribe them:  
+
+![alt text](image.png)
+
+An example of output from this:  
+
+![alt text](image-1.png)
+
+That is the context for this small Python script: it converts a plain transcript into a pipe-delimited table suitable for inspection or further processing.
+
+An example of its output:
+
+![alt text](image-2.png)
+
+## The detail
 
 Key items in this workspace:
 - Script: [convert_transcript_to_table.py](convert_transcript_to_table.py) — contains the main function [`build_dataframe_with_index`](convert_transcript_to_table.py).
