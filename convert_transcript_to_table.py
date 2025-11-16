@@ -22,7 +22,7 @@ def build_dataframe_with_index(input_file):
     last_minute = None
 
     for i, block in enumerate(blocks):
-        match = re.match(r"(\d{2}):(\d{2}):(\d{2})\s+—\s+(Speaker\s+[12])\s+(.*)", block)
+        match = re.match(r"(\d{2}):(\d{2}):(\d{2})\s+(Speaker\s+[12])\s+(.*)", block)
         if match:
             hh, mm, ss, speaker, text = match.groups()
             timestamp = f"{hh}:{mm}:{ss}"
@@ -47,4 +47,4 @@ def build_dataframe_with_index(input_file):
     print("✅ Pipe-delimited file saved as output_transcript.txt")
 
 # Example usage
-build_dataframe_with_index("test_input_transcript.txt")
+build_dataframe_with_index("erp.txt")
