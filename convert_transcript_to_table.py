@@ -42,5 +42,9 @@ def build_dataframe_with_index(input_file):
     df = pd.DataFrame(rows, columns=["Speaker", "Text", "Timestamp Marker", "Index"])
     print(df)
 
+    # Save to pipe-delimited file
+    df.to_csv("output_transcript.txt", sep="|", index=False, encoding="utf-8")
+    print("✅ Pipe-delimited file saved as output_transcript.txt")
+
 # Example usage
 build_dataframe_with_index("input_transcript.txt")
