@@ -9,7 +9,7 @@ from docx.shared import Inches
 from pathlib import Path
 import subprocess
 
-def convert_pdfs_to_pngs(input_folder: Path, output_folder: Path):
+def convert_pdfs_to_pngs(input_folder: Path, output_folder: Path, dpi: int = 300):
     """
     Converts all single-page PDF files in the input folder to PNG images using mutool.
     Cleans the output folder before writing new images.
@@ -29,6 +29,7 @@ def convert_pdfs_to_pngs(input_folder: Path, output_folder: Path):
             print(f"Converting {pdf_file.name} with mutool...")
             subprocess.run([
                 "mutool", "convert",
+                "-O", f"resolution={dpi}",
                 "-o", str(out_name),
                 str(pdf_file)
             ], check=True)
@@ -59,7 +60,8 @@ def main():
     output_docx = output_folder.parent / "png_combined.docx"
 
     # Run conversion and document creation
-    convert_pdfs_to_pngs(input_folder, output_folder)
+    resolution = 300
+    convert_pdfs_to_pngs(input_folder, output_folder, dpi=300)
     build_docx_from_images(output_folder, output_docx)
 
 if __name__ == "__main__":
