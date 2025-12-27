@@ -1,17 +1,17 @@
 # run as linux!
 # Setup instructions:
 # sudo apt update
-# sudo apt install poppler-utils
-# pip install pdf2image pillow python-docx
+# sudo apt install mupdf-tools
+# pip install python-docx
 
 from docx import Document
 from docx.shared import Inches
 from pathlib import Path
-from pdf2image import convert_from_path
+import subprocess
 
-def convert_pdfs_to_pngs(input_folder: Path, output_folder: Path, dpi: int = 300):
+def convert_pdfs_to_pngs(input_folder: Path, output_folder: Path):
     """
-    Converts all single-page PDF files in the input folder to PNG images.
+    Converts all single-page PDF files in the input folder to PNG images using mutool.
     Cleans the output folder before writing new images.
     """
     # Remove any existing PNGs in the output folder
@@ -24,17 +24,18 @@ def convert_pdfs_to_pngs(input_folder: Path, output_folder: Path, dpi: int = 300
     pdf_files = sorted(f for f in input_folder.glob("*.pdf") if f.is_file())
 
     for pdf_file in pdf_files:
+        out_name = output_folder / (pdf_file.stem + ".png")
         try:
-            print(f"Converting {pdf_file.name}...")
-            # Convert PDF to image(s) at specified DPI
-            images = convert_from_path(pdf_file, dpi=dpi)
-            # Save the first (and only) page as PNG
-            out_name = output_folder / (pdf_file.stem + ".png")
-            images[0].save(out_name, "PNG")
-        except Exception as e:
-            print(f"Failed to convert {pdf_file.name}: {e}")
+            print(f"Converting {pdf_file.name} with mutool...")
+            subprocess.run([
+                "mutool", "convert",
+                "-o", str(out_name),
+                str(pdf_file)
+            ], check=True)
+        except subprocess.CalledProcessError as e:
+            print(f"mutool failed on {pdf_file.name}: {e}")
 
-    print(f"Converted {len(pdf_files)} PDFs to PNGs.")
+    print(f"Processed {len(pdf_files)} PDFs.")
 
 def build_docx_from_images(image_folder: Path, output_docx: Path, image_width_in: float = 6.5):
     """
