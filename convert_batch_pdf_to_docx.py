@@ -9,11 +9,12 @@ from pathlib import Path
 from pdf2image import convert_from_path
 
 def convert_pdfs_to_pngs(input_folder: Path, output_folder: Path, dpi: int = 300):
-    for old_png in output_folder.glob("*.png"):
-        old_png.unlink()
+    if output_folder.exists():
+        for old_png in output_folder.glob("*.png"):
+            old_png.unlink()
     output_folder.mkdir(exist_ok=True)
-    pdf_files = sorted(input_folder.glob("*.pdf"))
 
+    pdf_files = sorted(f for f in input_folder.glob("*.pdf") if f.is_file())
     for pdf_file in pdf_files:
         try:
             print(f"Converting {pdf_file.name}...")
@@ -34,7 +35,7 @@ def build_docx_from_images(image_folder: Path, output_docx: Path, image_width_in
         doc.add_picture(str(image_path), width=Inches(image_width_in))
 
     doc.save(output_docx)
-    print(f"Inserted {len(image_files)} images into {output_docx.name}.")
+    print(f"Inserted {len(image_files)} images into {output_docx}.")
 
 def main():
     input_folder = Path("/mnt/sc/temp/downloads/")
