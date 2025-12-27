@@ -22,8 +22,33 @@ sudo apt install poppler-utils
 pip install pdf2image pillow python-docx
 ```
 
-### Execution
+## 📂 Folder Structure
 
-```linux
-python3 ./convert_batch_pdf_to_docx.py
+Place your single-page PDFs in a folder (e.g., `/mnt/sc/temp/downloads/`). The script will:
+
+- Convert them to PNGs in a subfolder called `png_out/`
+- Create a Word document named `png_combined.docx` in the same parent folder
+
+## 🚀 Usage
+
+Run the script directly:
+
+```bash
+python3 pdf_to_word_images.py
 ```
+
+## 🧩 Customization
+
+- Change `dpi` in `convert_pdfs_to_pngs()` to adjust image quality
+- Modify `image_width_in` in `build_docx_from_images()` to scale images differently
+- Update `input_folder` in `main()` to point to your desired PDF directory
+
+## 📝 Notes
+
+- This script assumes each PDF contains a single page
+- Output Word document is image-based (not editable text)
+- Ideal for preserving layout and visual fidelity
+
+## 📄 License
+
+MIT License — feel free to use, modify, and share.
