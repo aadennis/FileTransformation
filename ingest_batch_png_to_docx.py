@@ -18,10 +18,6 @@ for i, image_path in enumerate(image_files):
     # Add image (scale to page width if needed)
     doc.add_picture(str(image_path), width=Inches(6.5))
     
-    # Add a page break after each image except the last
-    if i < len(image_files) - 1:
-        doc.add_page_break()
-
 # Save the document
 doc.save(output_docx)
 print(f"Saved to {output_docx}")
